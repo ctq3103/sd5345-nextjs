@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
+import { NextAuthProvider } from "@/app/api/NextAuthProvider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,12 +29,14 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <div className='max-w-full mx-auto text-white'>
+        <NextAuthProvider>
+          <div className='max-w-full mx-auto text-white'>
 						<Navbar />
 						<div className='min-h-screen h-full w-full'>
 							{children}
 						</div>
 					</div>  
+        </NextAuthProvider>
       </body>
     </html>
   );

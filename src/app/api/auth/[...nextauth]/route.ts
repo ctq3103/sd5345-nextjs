@@ -43,7 +43,7 @@ export const authOptions: NextAuthOptions = {
           name: profile.name,
           email: profile.email,
           image: profile.picture,
-          role: profile.role ?? 'user',
+          role: 'user',
         };
       },
     }),
@@ -52,9 +52,9 @@ export const authOptions: NextAuthOptions = {
     async signIn({ user, account }) {
       if (account?.provider === 'google') {
         const { name, email, role, image } = user;
-
+        const baseUrl = process.env.NEXTAUTH_URL;
         try {
-          const res = await fetch(`${process.env.NEXTAUTH_URL}/api/user`, {
+          const res = await fetch(`${baseUrl}/api/user`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -62,16 +62,17 @@ export const authOptions: NextAuthOptions = {
             body: JSON.stringify({ name, email, role, image }),
           });
 
-          const data = await res.json();
-
-          if (res.ok) {
-            user.mongoId = data.data._id;
-            user.role = data.data.role;
-            return true;
-          } else {
-            console.error('❌ User creation failed', data);
+          if (!res.ok) {
+            const errorText = await res.text();
+            console.error('❌ User creation failed', errorText);
             return false;
           }
+
+          const data = await res.json();
+          user.mongoId = data.data._id;
+          user.role = data.data.role;
+          return true;
+
         } catch (error) {
           console.error('❌ signIn error:', error);
           return false;
