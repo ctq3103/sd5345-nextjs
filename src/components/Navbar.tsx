@@ -13,12 +13,12 @@ import {
   Eye,
   Home,
 } from 'lucide-react';
-// import { useSession } from 'next-auth/react';
+import { useSession } from 'next-auth/react';
 
 export default function Navbar() {
   const pathname = usePathname();
   const router = useRouter();
-  // const { status, data: session } = useSession();
+  const { status, data: session } = useSession();
 
   return (
     <div className='sticky top-0 z-30'>
@@ -26,7 +26,7 @@ export default function Navbar() {
       <div className='navbar bg-[var(--color-background)] text-[var(--color-foreground)] border-b border-[var(--color-border)] h-16 px-4 md:px-10'>
         <div className='flex-1'>
           <Link href='/' className='text-2xl font-bold italic text-[var(--color-primary)]'>
-            News <span className='text-black'>Times</span>
+            News<span className='text-black'>Vibe</span>
           </Link>
         </div>
 
@@ -83,7 +83,7 @@ export default function Navbar() {
                 Trending
               </Link>
             </li>
-            {/* {status === 'unauthenticated' && (
+            {status === 'unauthenticated' && (
               <li>
                 <Link
                   href={'/profile'}
@@ -94,20 +94,20 @@ export default function Navbar() {
                   Profile
                 </Link>
               </li>
-            )} */}
-            {/* {status === 'authenticated' && (
+            )}
+            {status === 'authenticated' && (
               <div className='ml-4 flex items-center'>
                 <Image
-                  className='rounded-full border-2'
+                  className='rounded-full border-2 border-primary shadow-md hover:scale-105 transition-transform duration-150'
                   role='button'
-                  src={session?.user?.image}
-                  width={28}
-                  height={28}
+                  src={session?.user?.image ?? 'https://api.dicebear.com/7.x/bottts/svg?seed=user'} 
+                  width={32}
+                  height={32}
                   alt='Profile Picture'
                   onClick={() => router.push('/profile')}
                 />
               </div>
-            )} */}
+            )}
           </ul>
         </div>
 

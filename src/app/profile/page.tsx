@@ -1,10 +1,9 @@
 'use client';
 
 import SignIn from '@/components/SignIn';
-// import Bookmark from '@/components/Bookmark';
-// import History from '@/components/History';
-// import Loader from '@/components/Loader';
-// import SigninBtn from '@/components/SigninBtn';
+import Bookmark from '@/components/Bookmark';
+import History from '@/components/History';
+import Loader from '@/components/Loader';
 import { signOut, useSession } from 'next-auth/react';
 import Image from 'next/image';
 import React, { useState } from 'react';
@@ -18,12 +17,12 @@ export default function Profile() {
 	const { status, data: session } = useSession();
 	const [activeTab, setActiveTab] = useState<number>(0);
 
-	// const tabs: Tab[] = [
-	// 	{ title: 'History', component: <History /> },
-	// 	{ title: 'Bookmark', component: <Bookmark /> },
-	// ];
+	const tabs: Tab[] = [
+		{ title: 'History', component: <History /> },
+		{ title: 'Bookmark', component: <Bookmark /> },
+	];
 
-	// if (status === 'loading') return <Loader />;
+	if (status === 'loading') return <Loader />;
 
 	if (status === 'authenticated') {
 		return (
@@ -55,7 +54,7 @@ export default function Profile() {
 				<div className='mt-8'>
 					<div className='flex justify-center mb-4'>
 						<div className='flex bg-slate-100 rounded-full shadow-inner overflow-hidden'>
-							{/* {tabs.map((tab, index) => (
+							{tabs.map((tab, index) => (
 								<button
 									key={index}
 									className={`px-6 py-2 text-sm font-medium transition-all duration-200 ${
@@ -66,13 +65,13 @@ export default function Profile() {
 									onClick={() => setActiveTab(index)}>
 									{tab.title}
 								</button>
-							))} */}
+							))}
 						</div>
 					</div>
 
-					{/* <div className='bg-white p-4 rounded-xl shadow-sm border border-slate-200'>
+					<div className='bg-white p-4 rounded-xl shadow-sm border border-slate-200'>
 						{tabs[activeTab].component}
-					</div> */}
+					</div>
 				</div>
 			</div>
 		);
