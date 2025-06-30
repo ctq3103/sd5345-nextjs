@@ -2,7 +2,6 @@
 
 import { fetchAllCategoryAction } from '@/actions/category';
 import { addNewsAction } from '@/actions/news';
-import FileInput from '@/components/FileInput';
 import Input from '@/components/Input';
 import SubmitButton from '@/components/SubmitButton';
 import Textarea from '@/components/Textarea';
@@ -19,11 +18,11 @@ export default function AddNews() {
   const formRef = useRef<HTMLFormElement | null>(null);
   const successRef = useRef<HTMLParagraphElement | null>(null);
   const failedRef = useRef<HTMLParagraphElement | null>(null);
-  // const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [categories, setCategories] = useState<ICategory[]>([]);
   const [content, setContent] = useState<string>('');
   const { status, data: session } = useSession();
-
+  console.log(status);
+  
   useEffect(() => {
     const fetchCategoryData = async () => {
       try {

@@ -7,10 +7,6 @@ import { useSession } from 'next-auth/react';
 import { useParams, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
-interface Params {
-  categoryId: string;
-}
-
 export default function DeleteCategory() {
   const { categoryId } = useParams();
   const { status, data: session } = useSession();

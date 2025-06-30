@@ -1,16 +1,14 @@
 'use client';
 
 import {
-  createCategoryAction,
   fetchCategoryAction,
   updateCategoryAction,
 } from '@/actions/category';
-import FileInput from '@/components/FileInput';
 import Input from '@/components/Input';
 import SubmitButton from '@/components/SubmitButton';
 import Textarea from '@/components/Textarea';
 import { useParams, useRouter } from 'next/navigation';
-import { FormEvent, useEffect, useRef, useState } from 'react';
+import {  useEffect, useRef, useState } from 'react';
 
 interface CategoryData {
   name: string;
@@ -21,7 +19,7 @@ export default function UpdateCategory() {
   const formRef = useRef<HTMLFormElement>(null);
   const successRef = useRef<HTMLParagraphElement>(null);
   const failedRef = useRef<HTMLParagraphElement>(null);
-  const [selectedFile, setSelectedFile] = useState<File | null>(null);
+  const [_, setSelectedFile] = useState<File | null>(null);
   const [categoryData, setCategoryData] = useState<CategoryData>({
     name: '',
     description: '',
@@ -39,7 +37,7 @@ export default function UpdateCategory() {
           name: fetchedCategoryData.name || '',
           description: fetchedCategoryData.description || '',
         });
-      } catch (error) {
+      } catch (_) {
         if (failedRef.current) {
           failedRef.current.textContent = 'Error fetching category data';
         }

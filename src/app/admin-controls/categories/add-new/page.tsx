@@ -1,17 +1,16 @@
 'use client';
 
 import { createCategoryAction } from '@/actions/category';
-import FileInput from '@/components/FileInput';
 import Input from '@/components/Input';
 import SubmitButton from '@/components/SubmitButton';
 import Textarea from '@/components/Textarea';
-import { FormEvent, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 
 export default function CreateCategory() {
 	const formRef = useRef<HTMLFormElement>(null);
 	const successRef = useRef<HTMLParagraphElement>(null);
 	const failedRef = useRef<HTMLParagraphElement>(null);
-	const [selectedFile, setSelectedFile] = useState<File | null>(null);
+	const [_, setSelectedFile] = useState<File | null>(null);
 
 	return (
 		<div className='grid place-items-center min-h-screen bg-slate-50 px-4'>

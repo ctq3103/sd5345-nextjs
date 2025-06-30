@@ -20,7 +20,6 @@ const fetchNewsData = async (): Promise<NewsItem[] | null> => {
 		);
 		if (!res.ok) return null;
 		const data = await res.json();
-		console.log(data);
 		return data.newsData;
 	} catch (error) {
 		console.error('Error fetching news:', error);
